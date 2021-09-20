@@ -26,6 +26,7 @@ type PropsTypeApp = {
 function App(props: PropsTypeApp) {
     return (
         <BrowserRouter>
+            asads
             <div className={"mainPage"}>
                 <Header/>
                 <div className={"mainContent"}>
