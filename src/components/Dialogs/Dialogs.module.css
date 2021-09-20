@@ -1,0 +1,65 @@
+.dialogs {
+    display: flex;
+}
+
+.dialogsPeoples {
+    width: 350px;
+    margin: 20px 0 0 20px;
+    background-color: white;
+    border-radius: 20px;
+
+}
+
+.dialogsHuman {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.dialogsHuman .active {
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 10px 20px 10px 10px;
+}
+
+.imgDialogsHuman {
+    width: 20%;
+    border-radius: 100%;
+}
+
+.dialogsHumanText {
+    margin: 0 0 0 20px;
+}
+
+.messagePeople {
+    width: 500px;
+    background-color: white;
+    margin: 20px 0 0 10px;
+    border-radius: 20px;
+}
+
+.message {
+    padding: 20px;
+}
+
+.inputDialogs {
+    width: 70%;
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid darkgrey;
+    outline: none;
+    margin-left: 10px;
+    padding: 20px;
+    bottom: -120px;
+    font-weight: bold;
+}
+
+.buttonDialogs {
+    position: relative;
+    bottom: -120px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}

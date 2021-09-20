@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.mainContent {
+    display: flex;
+    overflow: hidden;
+}
+
+
+

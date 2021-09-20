@@ -1,0 +1,39 @@
+.content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0 0 20px;
+}
+
+.nameAndActive {
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    padding-bottom: 20px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.active {
+    font-weight: lighter;
+}
+
+.descrOfHuman {
+    margin-top: 40px;
+}
+.elemDescrOfHuman{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.textDescr{
+    color: grey;
+}
+.elemDescf{
+    color: cornflowerblue;
+}

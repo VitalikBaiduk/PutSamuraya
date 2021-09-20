@@ -1,0 +1,13 @@
+body{
+    background-color: lightgrey;
+}
+
+.mainHeader {
+    display: flex;
+    background-color: rgb(73, 117, 167);
+}
+
+.logo {
+    width: 5%;
+    margin-left: 170px;
+}

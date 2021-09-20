@@ -1,0 +1,26 @@
+.content{
+display: flex;
+}
+.photoAndInfo{
+background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0 0 20px;
+}
+.photo{
+    width: 250px;
+    border-radius: 10px;
+}
+.statistics{
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 0 ;
+}
+.logo{
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+}
+.text{
+    font-size: 18px;
+}

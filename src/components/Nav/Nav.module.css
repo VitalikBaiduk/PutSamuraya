@@ -1,0 +1,33 @@
+.nav {
+    width: 150px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px 0 0 170px;
+    padding: 20px;
+
+}
+
+.elemNav {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}
+.elemNav a {
+    padding: 5px;
+}
+.elemNav a.activeLink{
+    color: white;
+    transition: 0.1s ;
+    font-weight: bold;
+    background-color: grey;
+    border-radius: 20px;
+}
