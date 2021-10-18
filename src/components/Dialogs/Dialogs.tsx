@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from "./Dialogs.module.css"
 import {DialogsItem} from './DialogsItem/DialogsItem';
 import {MessageOfDialog} from "./MessangeOfDialogs/MessageOfDialog";
-import {ArrMessageType, ArrOfPeopleType} from "../../redux/state";
+import {
+    ActionType,
+    ArrMessageType,
+    ArrOfPeopleType,
+    sendMessageActionCreator,
+    updateNewMessageBodyActionCreator
+} from "../../redux/state";
 
 type DialogsPropsType = {
+    dispatch: (action: ActionType) => void
     arrOfPeople: Array<ArrOfPeopleType>
     arrMessage: Array<ArrMessageType>
+    message: string
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -24,12 +32,17 @@ export const Dialogs = (props: DialogsPropsType) => {
         )
     })
 
-    const newMessage = React.createRef<HTMLInputElement>()
+    const addNewMessage = (e: ChangeEvent<HTMLInputElement>) => {
+        debugger
+        props.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value))
+    }
+    const sendMessage = () => {
+        props.dispatch(sendMessageActionCreator())
+    }
 
-    const addMessage = () => {
-        if (newMessage.current) {
-            let text = newMessage.current.value
-            alert(text)
+    const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            props.dispatch(sendMessageActionCreator())
         }
     }
 
@@ -40,8 +53,11 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={classes.messagePeople}>
                 {dialogsMessage}
-                <input placeholder="Enter your message" ref={newMessage} className={classes.inputDialogs}/>
-                <button onClick={addMessage} className={classes.buttonDialogs}>Send</button>
+                <div className={classes.inputAndButtonDialogs}>
+                    <input onKeyPress={pressEnter} placeholder="Enter your message" onChange={addNewMessage} value={props.message}
+                           className={classes.inputDialogs}/>
+                    <button onClick={sendMessage} className={classes.buttonDialogs}>Send</button>
+                </div>
             </div>
         </div>
     )

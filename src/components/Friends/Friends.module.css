@@ -1,0 +1,22 @@
+.mainDiv {
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 40px;
+}
+
+.divFriends {
+    display: flex;
+    max-width: 300px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.imgFriends {
+    width: 20%;
+    border-radius: 100%;
+}
+
+.nameOfPeoples {
+    margin-left: 20px;
+}

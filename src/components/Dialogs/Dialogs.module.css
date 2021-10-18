@@ -32,7 +32,7 @@
 }
 
 .messagePeople {
-    width: 500px;
+    width: 600px;
     background-color: white;
     margin: 20px 0 0 10px;
     border-radius: 20px;
@@ -42,21 +42,23 @@
     padding: 20px;
 }
 
+.inputAndButtonDialogs {
+    display: flex;
+    margin: 10px 0;
+}
+
 .inputDialogs {
     width: 70%;
-    position: relative;
     border-radius: 20px;
     border: 1px solid darkgrey;
     outline: none;
     margin-left: 10px;
     padding: 20px;
-    bottom: -120px;
     font-weight: bold;
 }
 
 .buttonDialogs {
-    position: relative;
-    bottom: -120px;
+
     border-radius: 20px;
     border: none;
     padding: 10px 20px;

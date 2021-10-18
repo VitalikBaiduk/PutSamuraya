@@ -1,22 +1,23 @@
 import React, {ChangeEvent} from 'react';
 import classes from "./Post.module.css";
+import {ActionType, addPostActionCreator, changeInputValueActionCreator} from "../../../redux/state";
 
 
 export type InputPropsType = {
-    addPost: () => void
+    dispatch: (action: ActionType) => void
     newInputValue: string
-    changeInputValue: (newValue: string) => void
 }
+
 
 export const Input = (props: InputPropsType) => {
 
     const addPosts = () => {
-        if(props.newInputValue){
-            props.addPost()
+        if (props.newInputValue) {
+            props.dispatch(addPostActionCreator())
         }
     }
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.changeInputValue(e.currentTarget.value)
+        props.dispatch(changeInputValueActionCreator(e.currentTarget.value))
     }
     return (
         <div className={classes.mainInput}>

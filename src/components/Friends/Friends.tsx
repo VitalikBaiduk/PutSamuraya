@@ -1,10 +1,27 @@
 import React from 'react';
-import "./Friends.module.css"
+import classes from "./Friends.module.css"
+import {ArrOfPeopleType} from "../../redux/state";
 
-export const Friends = () => {
+
+type FriendsPropsType = {
+    friends: Array<ArrOfPeopleType>
+}
+
+export const Friends = (props: FriendsPropsType) => {
+
+    let divPeople = props.friends.map((elem) => {
+        return (
+            <div className={classes.divFriends}>
+                <img className={classes.imgFriends} src={elem.img}/>
+                <h4 className={classes.nameOfPeoples}>{elem.name}</h4>
+            </div>
+        )
+    })
+
     return (
-        <div>
-
+        <div className={classes.mainDiv}>
+            <h3>All friends</h3>
+            {divPeople}
         </div>
     )
 }

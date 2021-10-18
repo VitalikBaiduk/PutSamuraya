@@ -12,39 +12,38 @@ import {Photo} from "./components/Photo/Photo";
 import {Music} from "./components/Music/Music";
 import {Games} from "./components/Games/Games";
 import {Settings} from "./components/Settings/Settings";
-import {ArrMessageType, ArrOfPeopleType, ArrPostsType} from "./redux/state";
+import {ActionType, StateType} from "./redux/state";
 
 type PropsTypeApp = {
-    arrOfPeople: Array<ArrOfPeopleType>
-    arrMessage: Array<ArrMessageType>
-    posts: Array<ArrPostsType>
-    addPost: () => void
-    newInputValue: string
-    changeInputValue: (newValue: string) => void
+    state: StateType
+    dispatch: (action: ActionType) => void
 }
 
 function App(props: PropsTypeApp) {
     return (
         <BrowserRouter>
-            asads
             <div className={"mainPage"}>
                 <Header/>
                 <div className={"mainContent"}>
                     <Nav/>
                     <Route path="/profile" render={() =>
                         <Profile
-                            posts={props.posts}
-                            addPost={props.addPost}
-                            newInputValue={props.newInputValue}
-                            changeInputValue={props.changeInputValue}
+                            posts={props.state.posts}
+                            dispatch={props.dispatch}
+                            newInputValue={props.state.newInputValue}
                         />}/>
                     <Route path="/news" component={News}/>
                     <Route path="/dialogs" render={() =>
                         <Dialogs
-                            arrOfPeople={props.arrOfPeople}
-                            arrMessage={props.arrMessage}
+                            arrOfPeople={props.state.arrOfPeople}
+                            arrMessage={props.state.arrMessage}
+                            message={props.state.newMessageDialogs}
+                            dispatch={props.dispatch}
                         />}/>
-                    <Route path="/friends" component={Friends}/>
+                    <Route path="/friends" render={() =>
+                        <Friends
+                            friends={props.state.friends}
+                        />}/>
                     <Route path="/community" component={Community}/>
                     <Route path="/photo" component={Photo}/>
                     <Route path="/music" component={Music}/>

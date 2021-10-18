@@ -24,6 +24,7 @@
 .elemNav a {
     padding: 5px;
 }
+
 .elemNav a.activeLink{
     color: white;
     transition: 0.1s ;

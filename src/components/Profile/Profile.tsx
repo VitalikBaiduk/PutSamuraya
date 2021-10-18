@@ -1,17 +1,16 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import classes from "./Profile.module.css";
 import {ProtoAndInfo} from "./PhotoAndInfo";
 import {DescriptionProfile} from "./DescriptionProfile";
 import {Posts} from "./Post/Posts";
 import {Input} from "./Post/Input";
-import {ArrPostsType} from "../../redux/state";
+import {ActionType, ArrPostsType} from "../../redux/state";
 
 
 export type ProfileType = {
     posts: Array<ArrPostsType>
-    addPost: () => void
+    dispatch: (action: ActionType) => void
     newInputValue: string
-    changeInputValue: (newValue: string) => void
 }
 
 export const Profile = (props: ProfileType) => {
@@ -22,9 +21,8 @@ export const Profile = (props: ProfileType) => {
                 <ProtoAndInfo/>
                 <DescriptionProfile/>
             </div>
-            <Input addPost={props.addPost}
+            <Input dispatch={props.dispatch}
                    newInputValue={props.newInputValue}
-                   changeInputValue={props.changeInputValue}
             />
             <Posts posts={props.posts}/>
         </div>
