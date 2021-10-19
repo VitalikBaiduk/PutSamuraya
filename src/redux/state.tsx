@@ -5,6 +5,10 @@ import img3 from "../img/img3.png";
 import img4 from "../img/img4.png";
 import img5 from "../img/img5.png";
 import img6 from "../img/img6.png";
+import {addPostActionCreatorType, postReducer} from "./postReducer";
+import {changeInputValueActionCreatorType, reducerInputValue} from "./reducerInputValue";
+import {reducerArrMessage, sendMessageActionCreatorType} from "./reducerArrMessage";
+import {reducerNewMessageDialogs, updateNewMessageBodyActionCreator} from "./reducerNewMessageDialogs";
 
 let renderEntireThree = (props: StateType) => {
     console.log("state changed")
@@ -43,15 +47,10 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 }
 
-export type ActionType = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof changeInputValueActionCreator>
-    | ReturnType<typeof updateNewMessageBodyActionCreator>
-    | ReturnType<typeof sendMessageActionCreator>
-
-const addpost = "ADD-POST";
-const changeinputvalue = "CHANGE-INPUT-VALUE";
-const updateNewMessageBody = "UPDATE-NEW-MESSAGE-BODY";
-const sendMessage = "SEND-MESSAGE";
+export type ActionType = addPostActionCreatorType
+    | changeInputValueActionCreatorType
+    | updateNewMessageBodyActionCreator
+    | sendMessageActionCreatorType
 
 export let store: StoreType = {
     _state: {
@@ -105,41 +104,10 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action: ActionType) {
-        if (action.type === addpost) {
-            this._addPost()
-        } else if (action.type === changeinputvalue) {
-            this._changeInputValue(action.newValue)
-        } else if (action.type === updateNewMessageBody) {
-            this._state.newMessageDialogs = action.message
-            renderEntireThree(this._state)
-        } else if (action.type === sendMessage) {
-            let newMessage = this._state.newMessageDialogs
-            this._state.arrMessage.push({id: 6, message: newMessage})
-            this._state.newMessageDialogs = ''
-            renderEntireThree(this._state)
-        }
+        this._state = postReducer(this._state, action)
+        this._state = reducerInputValue(this._state, action)
+        this._state = reducerNewMessageDialogs(this._state, action)
+        this._state = reducerArrMessage(this._state, action)
+        renderEntireThree(this._state)
     }
-}
-
-export const addPostActionCreator = () => {
-    return {
-        type: addpost
-    } as const
-}
-export const changeInputValueActionCreator = (newValue: string) => {
-    return {
-        type: changeinputvalue,
-        newValue: newValue
-    } as const
-}
-export const updateNewMessageBodyActionCreator = (message: string) => {
-    return {
-        type: updateNewMessageBody,
-        message: message
-    } as const
-}
-export const sendMessageActionCreator = () => {
-    return {
-        type: sendMessage,
-    } as const
 }

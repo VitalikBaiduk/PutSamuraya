@@ -6,9 +6,9 @@ import {
     ActionType,
     ArrMessageType,
     ArrOfPeopleType,
-    sendMessageActionCreator,
-    updateNewMessageBodyActionCreator
 } from "../../redux/state";
+import {updateNewMessageBodyActionCreator} from "../../redux/reducerNewMessageDialogs";
+import {sendMessageActionCreator} from "../../redux/reducerArrMessage";
 
 type DialogsPropsType = {
     dispatch: (action: ActionType) => void
@@ -33,7 +33,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     })
 
     const addNewMessage = (e: ChangeEvent<HTMLInputElement>) => {
-        debugger
         props.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value))
     }
     const sendMessage = () => {
