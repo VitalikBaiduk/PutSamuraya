@@ -5,10 +5,12 @@ import img3 from "../img/img3.png";
 import img4 from "../img/img4.png";
 import img5 from "../img/img5.png";
 import img6 from "../img/img6.png";
-import {addPostActionCreatorType, postReducer} from "./postReducer";
-import {changeInputValueActionCreatorType, reducerInputValue} from "./reducerInputValue";
-import {reducerArrMessage, sendMessageActionCreatorType} from "./reducerArrMessage";
-import {reducerNewMessageDialogs, updateNewMessageBodyActionCreator} from "./reducerNewMessageDialogs";
+import {addPostActionCreatorType, changeInputValueActionCreatorType, profileReducer} from "./profileReducer";
+import {
+    dialogsReducer,
+    sendMessageActionCreatorType,
+    updateNewMessageBodyActionCreator
+} from "./dialogsReducer";
 
 let renderEntireThree = (props: StateType) => {
     console.log("state changed")
@@ -104,10 +106,8 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action: ActionType) {
-        this._state = postReducer(this._state, action)
-        this._state = reducerInputValue(this._state, action)
-        this._state = reducerNewMessageDialogs(this._state, action)
-        this._state = reducerArrMessage(this._state, action)
+        this._state = profileReducer(this._state, action)
+        this._state = dialogsReducer(this._state, action)
         renderEntireThree(this._state)
     }
 }

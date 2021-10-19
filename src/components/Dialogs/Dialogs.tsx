@@ -7,8 +7,7 @@ import {
     ArrMessageType,
     ArrOfPeopleType,
 } from "../../redux/state";
-import {updateNewMessageBodyActionCreator} from "../../redux/reducerNewMessageDialogs";
-import {sendMessageActionCreator} from "../../redux/reducerArrMessage";
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = {
     dispatch: (action: ActionType) => void

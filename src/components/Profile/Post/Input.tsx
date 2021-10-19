@@ -1,8 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import classes from "./Post.module.css";
 import {ActionType} from "../../../redux/state";
-import {addPostActionCreator} from "../../../redux/postReducer";
-import {changeInputValueActionCreator} from "../../../redux/reducerInputValue";
+import {addPostActionCreator, changeInputValueActionCreator} from "../../../redux/profileReducer";
 
 
 export type InputPropsType = {
