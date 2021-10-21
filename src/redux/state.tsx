@@ -9,8 +9,9 @@ import {addPostActionCreatorType, changeInputValueActionCreatorType, profileRedu
 import {
     dialogsReducer,
     sendMessageActionCreatorType,
-    updateNewMessageBodyActionCreator
+    updateNewMessageBodyActionCreatorType
 } from "./dialogsReducer";
+import {friendsReducerActionCreatorType} from "./friendsReducer";
 
 let renderEntireThree = (props: StateType) => {
     console.log("state changed")
@@ -51,9 +52,9 @@ export type StoreType = {
 
 export type ActionType = addPostActionCreatorType
     | changeInputValueActionCreatorType
-    | updateNewMessageBodyActionCreator
+    | updateNewMessageBodyActionCreatorType
     | sendMessageActionCreatorType
-
+    | friendsReducerActionCreatorType
 export let store: StoreType = {
     _state: {
         arrOfPeople: [
@@ -106,8 +107,8 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action: ActionType) {
-        this._state = profileReducer(this._state, action)
-        this._state = dialogsReducer(this._state, action)
+        // this._state = profileReducer(this._state, action)
+        // this._state = dialogsReducer(this._state, action)
         renderEntireThree(this._state)
     }
 }

@@ -1,13 +1,12 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {StateType} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
-import {store} from "./redux/state";
+import {AppStateType, store} from "./redux/redux-store";
 
 
-let renderEntireThree = (state: StateType) => {
+let renderEntireThree = (state: AppStateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
@@ -19,7 +18,11 @@ let renderEntireThree = (state: StateType) => {
     );
 }
 renderEntireThree(store.getState())
-store.subscribe(renderEntireThree)
+store.subscribe(() =>{
+    let state = store.getState()
+    renderEntireThree(state)
+})
+//subscribe(renderEntireThree)
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

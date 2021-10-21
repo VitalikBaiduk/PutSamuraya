@@ -13,9 +13,10 @@ import {Music} from "./components/Music/Music";
 import {Games} from "./components/Games/Games";
 import {Settings} from "./components/Settings/Settings";
 import {ActionType, StateType} from "./redux/state";
+import {AppStateType} from "./redux/redux-store";
 
 type PropsTypeApp = {
-    state: StateType
+    state: AppStateType
     dispatch: (action: ActionType) => void
 }
 
@@ -28,21 +29,21 @@ function App(props: PropsTypeApp) {
                     <Nav/>
                     <Route path="/profile" render={() =>
                         <Profile
-                            posts={props.state.posts}
+                            posts={props.state.profileReducer.posts}
                             dispatch={props.dispatch}
-                            newInputValue={props.state.newInputValue}
+                            newInputValue={props.state.profileReducer.newInputValue}
                         />}/>
                     <Route path="/news" component={News}/>
                     <Route path="/dialogs" render={() =>
                         <Dialogs
-                            arrOfPeople={props.state.arrOfPeople}
-                            arrMessage={props.state.arrMessage}
-                            message={props.state.newMessageDialogs}
+                            arrOfPeople={props.state.dialogsReducer.arrOfPeople}
+                            arrMessage={props.state.dialogsReducer.arrMessage}
+                            message={props.state.dialogsReducer.newMessageDialogs}
                             dispatch={props.dispatch}
                         />}/>
                     <Route path="/friends" render={() =>
                         <Friends
-                            friends={props.state.friends}
+                            friends={props.state.friendsReducer.friends}
                         />}/>
                     <Route path="/community" component={Community}/>
                     <Route path="/photo" component={Photo}/>
