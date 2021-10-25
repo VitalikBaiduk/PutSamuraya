@@ -8,7 +8,6 @@ export type DialogsItemType = {
     img: string
 }
 
-
 export const DialogsItem = (props: DialogsItemType) => {
     return (
         <div>

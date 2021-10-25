@@ -24,15 +24,14 @@
 
 .textPost {
     display: inline-block;
-    margin-left: 20px;
-    margin-bottom: 20px;
+  margin: 20px 0 10px 0;
     background: lightgrey;
     border-radius: 20px 20px 20px 0px;
     padding: 20px
 }
 
 .inputProfile {
-    width: 88%;
+    width: 87%;
     padding: 10px;
     border-radius: 20px;
     outline: none;
@@ -48,5 +47,5 @@
 }
 
 .mainInput {
-    margin: 10px 20px;
+    /*margin: 10px 20px;*/
 }

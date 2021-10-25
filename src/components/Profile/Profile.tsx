@@ -2,15 +2,15 @@ import React from 'react';
 import classes from "./Profile.module.css";
 import {ProtoAndInfo} from "./PhotoAndInfo";
 import {DescriptionProfile} from "./DescriptionProfile";
-import {Posts} from "./Post/Posts";
-import {Input} from "./Post/Input";
 import {ActionType, ArrPostsType} from "../../redux/state";
+import {PostContainer} from "./Post/PostContainer";
+import {store} from "../../redux/redux-store";
 
 
 export type ProfileType = {
-    posts: Array<ArrPostsType>
-    dispatch: (action: ActionType) => void
-    newInputValue: string
+    // posts: Array<ArrPostsType>
+    // dispatch: (action: ActionType) => void
+    // newInputValue: string
 }
 
 export const Profile = (props: ProfileType) => {
@@ -21,10 +21,8 @@ export const Profile = (props: ProfileType) => {
                 <ProtoAndInfo/>
                 <DescriptionProfile/>
             </div>
-            <Input dispatch={props.dispatch}
-                   newInputValue={props.newInputValue}
-            />
-            <Posts posts={props.posts}/>
+            <PostContainer
+                store={store}/>
         </div>
-    )
+    );
 }
