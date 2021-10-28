@@ -1,11 +1,23 @@
-import {ActionType, ArrOfPeopleType} from "./state";
 import img1 from "../img/img1.png";
 import img2 from "../img/img2.png";
 import img3 from "../img/img3.png";
 import img4 from "../img/img4.png";
 import img5 from "../img/img5.png";
 import img6 from "../img/img6.png";
+import {addPostActionCreatorType, changeInputValueActionCreatorType} from "./profileReducer";
+import {sendMessageActionCreatorType, updateNewMessageBodyActionCreatorType} from "./dialogsReducer";
 
+export type ActionType = addPostActionCreatorType
+    | changeInputValueActionCreatorType
+    | updateNewMessageBodyActionCreatorType
+    | sendMessageActionCreatorType
+    | friendsReducerActionCreatorType
+
+export type ArrOfPeopleType = {
+    id: number
+    name: string
+    img: string
+}
 export type friendsReducerStateType = {
     friends: Array<ArrOfPeopleType>
 }

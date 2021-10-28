@@ -1,8 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import classes from "./Post.module.css";
-import {ActionType} from "../../../redux/state";
-import {addPostActionCreator, changeInputValueActionCreator} from "../../../redux/profileReducer";
+import {
+    addPostActionCreator,
+    addPostActionCreatorType,
+    changeInputValueActionCreator, changeInputValueActionCreatorType
+} from "../../../redux/profileReducer";
+import {friendsReducerActionCreatorType} from "../../../redux/friendsReducer";
+import {sendMessageActionCreatorType, updateNewMessageBodyActionCreatorType} from "../../../redux/dialogsReducer";
 
+export type ActionType = addPostActionCreatorType
+    | changeInputValueActionCreatorType
+    | updateNewMessageBodyActionCreatorType
+    | sendMessageActionCreatorType
+    | friendsReducerActionCreatorType
 
 export type InputPropsType = {
     dispatch: (action: ActionType) => void

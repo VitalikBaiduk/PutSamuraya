@@ -2,9 +2,7 @@ import React from 'react';
 import classes from "./Profile.module.css";
 import {ProtoAndInfo} from "./PhotoAndInfo";
 import {DescriptionProfile} from "./DescriptionProfile";
-import {ActionType, ArrPostsType} from "../../redux/state";
 import {PostContainer} from "./Post/PostContainer";
-import {store} from "../../redux/redux-store";
 
 
 export type ProfileType = {
@@ -21,8 +19,7 @@ export const Profile = (props: ProfileType) => {
                 <ProtoAndInfo/>
                 <DescriptionProfile/>
             </div>
-            <PostContainer
-                store={store}/>
+            <PostContainer/>
         </div>
     );
 }

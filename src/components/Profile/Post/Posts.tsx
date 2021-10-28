@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import classes from "./Post.module.css";
-import {ActionType, ArrPostsType} from "../../../redux/state";
+import {PropsType} from "./PostContainer";
 
-type PropsType = {
-    newInputValue: string
-    posts: Array<ArrPostsType>
-    addPosts: () => void
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
-}
+// type PropsType = {
+//     newInputValue: string
+//     posts: Array<ArrPostsType>
+//     addPosts: () => void
+//     onChange: (e: ChangeEvent<HTMLInputElement>) => void
+// }
 
 export const Posts = (props: PropsType) => {
 

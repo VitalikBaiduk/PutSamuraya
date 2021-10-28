@@ -1,11 +1,7 @@
 import React from 'react';
 import classes from "./Friends.module.css"
-import {ArrOfPeopleType} from "../../redux/state";
+import {FriendsPropsType} from "./FriendsContainer";
 
-
-type FriendsPropsType = {
-    friends: Array<ArrOfPeopleType>
-}
 
 export const Friends = (props: FriendsPropsType) => {
 
@@ -17,11 +13,8 @@ export const Friends = (props: FriendsPropsType) => {
             </div>
         )
     })
-
-    return (
-        <div className={classes.mainDiv}>
-            <h3>All friends</h3>
-            {divPeople}
-        </div>
-    )
+    return <div className={classes.mainDiv}>
+        <h3>All friends</h3>
+        {divPeople}
+    </div>
 }

@@ -4,21 +4,27 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import App from "./App";
 import {AppStateType, store} from "./redux/redux-store";
-
+import {BrowserRouter} from "react-router-dom";
+// import {Provider, StoreContext} from "./StoreContext";
+import {Provider} from "react-redux";
 
 let renderEntireThree = (state: AppStateType) => {
     ReactDOM.render(
-        <React.StrictMode>
-            <App
-                state={state}
-                dispatch={store.dispatch.bind(store)}
-            />
-        </React.StrictMode>,
+        <BrowserRouter>
+            <React.StrictMode>
+                <Provider store={store}>
+                    <App
+                        // state={state}
+                        // dispatch={store.dispatch.bind(store)}
+                    />
+                </Provider>
+            </React.StrictMode>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }
 renderEntireThree(store.getState())
-store.subscribe(() =>{
+store.subscribe(() => {
     let state = store.getState()
     renderEntireThree(state)
 })

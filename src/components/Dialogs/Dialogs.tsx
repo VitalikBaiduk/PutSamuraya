@@ -2,20 +2,26 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from "./Dialogs.module.css"
 import {DialogsItem} from './DialogsItem/DialogsItem';
 import {MessageOfDialog} from "./MessangeOfDialogs/MessageOfDialog";
-import {
-    ActionType,
-    ArrMessageType,
-    ArrOfPeopleType,
-} from "../../redux/state";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    arrOfPeople: Array<ArrOfPeopleType>
-    arrMessage: Array<ArrMessageType>
-    message: string
-    addNewMessage: (e: ChangeEvent<HTMLInputElement>) => void
-    sendMessage: () => void
-    pressEnter: (e: KeyboardEvent<HTMLInputElement>) => void
+export type ArrOfPeopleType = {
+    id: number
+    name: string
+    img: string
 }
+export type ArrMessageType = {
+    id: number
+    message: string
+}
+//
+// type DialogsPropsType = {
+//     arrOfPeople: Array<ArrOfPeopleType>
+//     arrMessage: Array<ArrMessageType>
+//     message: string
+//     addNewMessage: (e: ChangeEvent<HTMLInputElement>) => void
+//     sendMessage: () => void
+//     pressEnter: (e: KeyboardEvent<HTMLInputElement>) => void
+// }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
@@ -54,7 +60,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {dialogsMessage}
                 <div className={classes.inputAndButtonDialogs}>
                     <input onKeyPress={pressEnter} placeholder="Enter your message" onChange={addNewMessage}
-                           value={props.message}
+                           value={props.newMessageDialogs}
                            className={classes.inputDialogs}/>
                     <button onClick={sendMessage} className={classes.buttonDialogs}>Send</button>
                 </div>
