@@ -28,12 +28,15 @@ export const profileReducer = (state: initialStateType = initialState, action: A
     switch (action.type) {
         case addpost :
             let newPost = {id: 2, text: state.newInputValue, likeCount: 2};
-            state.posts = [...state.posts, newPost]
-            state.newInputValue = ''
-            return state
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost)
+            stateCopy.newInputValue = ''
+            return stateCopy
         case changeinputvalue:
-            state.newInputValue = action.newValue
-            return state
+            let stateCopy2 = {...state}
+            stateCopy2.newInputValue = action.newValue
+            return stateCopy2
         default :
             return state
     }

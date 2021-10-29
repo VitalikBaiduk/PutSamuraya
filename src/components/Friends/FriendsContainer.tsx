@@ -7,8 +7,8 @@ import {ArrOfPeopleType} from "../../redux/friendsReducer";
 type mapStateToPropsType = {
     friends: Array<ArrOfPeopleType>
 }
-
 export type FriendsPropsType = mapStateToPropsType
+
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         friends: state.friendsReducer.friends

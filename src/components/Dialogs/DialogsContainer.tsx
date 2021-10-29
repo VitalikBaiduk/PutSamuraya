@@ -10,59 +10,6 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 
-// type DialogsContainerType = {
-//     store: Store<EmptyObject & { profileReducer: profileReducerStateType, dialogsReducer: dialogsReducerType, friendsReducer: friendsReducerStateType }, ActionType>
-// }
-
-// export const DialogsContainer = () => {
-// let state = props.store.getState()
-//
-// const addNewMessage = (e: ChangeEvent<HTMLInputElement>) => {
-//     props.store.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value))
-// }
-// const sendMessage = () => {
-//     props.store.dispatch(sendMessageActionCreator())
-// }
-//
-// const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-//     if (e.key === "Enter") {
-//         props.store.dispatch(sendMessageActionCreator())
-//     }
-// }
-
-//     return (
-//         <div className={classes.dialogs}>
-//             <StoreContext.Consumer>
-//                 {
-//                     (store) => {
-//                         let state = store.getState()
-//                         const addNewMessage = (e: ChangeEvent<HTMLInputElement>) => {
-//                             store.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value))
-//                         }
-//                         const sendMessage = () => {
-//                             store.dispatch(sendMessageActionCreator())
-//                         }
-//
-//                         const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-//                             if (e.key === "Enter") {
-//                                 store.dispatch(sendMessageActionCreator())
-//                             }
-//                         }
-//                         return <Dialogs
-//                             arrOfPeople={state.dialogsReducer.arrOfPeople}
-//                             arrMessage={state.dialogsReducer.arrMessage}
-//                             message={state.dialogsReducer.newMessageDialogs}
-//                             addNewMessage={addNewMessage}
-//                             sendMessage={sendMessage}
-//                             pressEnter={pressEnter}
-//                         />
-//                     }
-//                 }
-//             </StoreContext.Consumer>
-//         </div>
-//     )
-// }
-
 type mapStateToPropsType = {
     arrOfPeople: Array<ArrOfPeopleType>
     arrMessage: Array<ArrMessageType>
