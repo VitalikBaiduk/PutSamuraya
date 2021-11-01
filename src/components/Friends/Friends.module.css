@@ -6,10 +6,22 @@
 }
 
 .divFriends {
+    width: 70%;
+}
+
+.photoAndName {
     display: flex;
+}
+
+.mainFriendsDiv {
+    display: flex;
+    align-items: center;
     max-width: 300px;
     margin-top: 20px;
     cursor: pointer;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .imgFriends {
@@ -19,4 +31,59 @@
 
 .nameOfPeoples {
     margin-left: 20px;
+}
+
+.followStyle {
+    border: 1px solid #5082b9;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.1s;
+    padding: 10px 17px;
+}
+
+.unFollowStyle {
+    border: 1px solid #5082b9;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.1s;
+    padding: 10px;
+}
+
+.unFollowStyle:hover {
+    padding: 10px;
+    border: 1px solid #5082b9;
+    background-color: red;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.followStyle:hover {
+    padding: 10px;
+    border: 1px solid #5082b9;
+    background-color: #5082b9;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.country {
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    margin-top: 10px;
+}
+
+.city {
+    font-weight: bold;
+    font-size: 13px;
+    color: grey;
 }
