@@ -13,11 +13,11 @@ type mapStateToPropsType = {
     newInputValue: string
     posts: Array<ArrPostsType>,
 }
-type mapDispatchToProps = {
+type mapDispatchToPropsType = {
     addPosts: () => void
     onChange: (text: ChangeEvent<HTMLInputElement>) => void
 }
-export type PropsType = mapStateToPropsType & mapDispatchToProps
+export type PropsType = mapStateToPropsType & mapDispatchToPropsType
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
@@ -25,7 +25,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         posts: state.profileReducer.posts
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         addPosts: () => {
             let state = store.getState()

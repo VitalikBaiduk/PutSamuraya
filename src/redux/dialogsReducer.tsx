@@ -31,6 +31,7 @@ export type DialogsInitialStateType = {
     arrMessage: Array<ArrMessageType>
     newMessageDialogs: string
 }
+
 let initialState: DialogsInitialStateType = {
     arrOfPeople: [
         {id: 1, name: "Andrew", img: img1},
@@ -54,15 +55,16 @@ let initialState: DialogsInitialStateType = {
 export const dialogsReducer = (state: DialogsInitialStateType = initialState, action: ActionType): DialogsInitialStateType => {
     switch (action.type) {
         case updateNewMessageBody :
-            let stateCopy = {...state}
-            stateCopy.newMessageDialogs = action.message
-            return stateCopy
+            return {
+                ...state,
+                newMessageDialogs: action.message
+            }
         case sendMessage :
-            let stateCopy2 = {...state}
-            let newMessage = state.newMessageDialogs
-            stateCopy2.arrMessage.push({id: 6, message: newMessage})
-            stateCopy2.newMessageDialogs = ''
-            return stateCopy2
+            return {
+                ...state,
+                arrMessage: [...state.arrMessage, {id: 6, message: state.newMessageDialogs}],
+                newMessageDialogs: ''
+            }
         default : {
             return state
         }

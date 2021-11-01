@@ -5,7 +5,7 @@ import {
     sendMessageActionCreator,
     updateNewMessageBodyActionCreator
 } from "../../redux/dialogsReducer";
-import {Dispatch, EmptyObject, Store} from "redux";
+import {Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -16,7 +16,7 @@ type mapStateToPropsType = {
     newMessageDialogs: string
 }
 type mapDispatchToPropsType = {
-    addNewMessage: (e: ChangeEvent<HTMLInputElement>) => void
+    addNewMessage: (text: string) => void
     sendMessage: () => void
     pressEnter: (e: KeyboardEvent<HTMLInputElement>) => void
 }
@@ -33,8 +33,8 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        addNewMessage: (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value))
+        addNewMessage: (text: string) => {
+            dispatch(updateNewMessageBodyActionCreator(text))
         },
         sendMessage: () => {
             dispatch(sendMessageActionCreator())

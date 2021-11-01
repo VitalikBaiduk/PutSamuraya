@@ -4,31 +4,13 @@ import {DialogsItem} from './DialogsItem/DialogsItem';
 import {MessageOfDialog} from "./MessangeOfDialogs/MessageOfDialog";
 import {DialogsPropsType} from "./DialogsContainer";
 
-export type ArrOfPeopleType = {
-    id: number
-    name: string
-    img: string
-}
-export type ArrMessageType = {
-    id: number
-    message: string
-}
-//
-// type DialogsPropsType = {
-//     arrOfPeople: Array<ArrOfPeopleType>
-//     arrMessage: Array<ArrMessageType>
-//     message: string
-//     addNewMessage: (e: ChangeEvent<HTMLInputElement>) => void
-//     sendMessage: () => void
-//     pressEnter: (e: KeyboardEvent<HTMLInputElement>) => void
-// }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsPeople = props.arrOfPeople.map((elem) => {
         let path = "/dialogs/" + elem.id
         return (
-            <DialogsItem path={path} name={elem.name} img={elem.img}/>
+            <DialogsItem key={elem.id} path={path} name={elem.name} img={elem.img}/>
         )
     })
 
@@ -39,7 +21,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     })
 
     const addNewMessage = (e: ChangeEvent<HTMLInputElement>) => {
-        props.addNewMessage(e)
+        props.addNewMessage(e.currentTarget.value)
     }
     const sendMessage = () => {
         props.sendMessage()
@@ -59,7 +41,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={classes.messagePeople}>
                 {dialogsMessage}
                 <div className={classes.inputAndButtonDialogs}>
-                    <input onKeyPress={pressEnter} placeholder="Enter your message" onChange={addNewMessage}
+                    <input onKeyPress={pressEnter} placeholder="Enter your message"
+                           onChange={addNewMessage}
                            value={props.newMessageDialogs}
                            className={classes.inputDialogs}/>
                     <button onClick={sendMessage} className={classes.buttonDialogs}>Send</button>
