@@ -15,6 +15,8 @@ export type ActionType = addPostActionCreatorType
     | followACType
     | unFollowACType
     | setUsersACType
+    | setCurrentPageType
+    | setTotalUsersCountType
 
 export type ArrOfPeopleType = {
     id: number
@@ -27,18 +29,24 @@ export type ArrOfPeopleType = {
     }
 }
 export type friendsReducerStateType = {
-    friends: Array<ArrOfPeopleType>
+    friends: Array<any>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState = {
     friends: [
-        {id: 1, followed: false, name: "Andrew Garfield", img: img1, address: {country: "Belarus", city: "Brest"}},
-        {id: 2, followed: true, name: "Robin Williams", img: img2, address: {country: "Belarus", city: "Minsk"}},
-        {id: 3, followed: false, name: "Kate Winslet", img: img3, address: {country: "Russia", city: "Moscow"}},
-        {id: 4, followed: true, name: "Elise Eberle", img: img4, address: {country: "USA", city: "LA"}},
-        {id: 5, followed: false, name: "Marta Dusseldorp", img: img5, address: {country: "Ukraine", city: "Kiev"}},
-        {id: 6, followed: true, name: "Brock Lesnar", img: img6, address: {country: "Belarus", city: "Baranovichi"}}
-    ]
+        // {id: 1, followed: false, name: "Andrew Garfield", img: img1, address: {country: "Belarus", city: "Brest"}},
+        // {id: 2, followed: true, name: "Robin Williams", img: img2, address: {country: "Belarus", city: "Minsk"}},
+        // {id: 3, followed: false, name: "Kate Winslet", img: img3, address: {country: "Russia", city: "Moscow"}},
+        // {id: 4, followed: true, name: "Elise Eberle", img: img4, address: {country: "USA", city: "LA"}},
+        // {id: 5, followed: false, name: "Marta Dusseldorp", img: img5, address: {country: "Ukraine", city: "Kiev"}},
+        // {id: 6, followed: true, name: "Brock Lesnar", img: img6, address: {country: "Belarus", city: "Baranovichi"}}
+    ],
+    pageSize: 4,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 export const friendsReducer = (state: friendsReducerStateType = initialState, action: ActionType): friendsReducerStateType => {
@@ -52,7 +60,6 @@ export const friendsReducer = (state: friendsReducerStateType = initialState, ac
                     return human.id === action.humanId ? {...human, followed: true} : human
                 })
             }
-
         case "UNFOLLOW":
             return {
                 ...state,
@@ -64,9 +71,20 @@ export const friendsReducer = (state: friendsReducerStateType = initialState, ac
         case "SET_USERS":
             return {
                 ...state,
-                friends: [...state.friends, ...action.users]
+                friends: [...action.users]
             }
-
+        case "SET_CURRENT_PAGE": {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case "SET_TOTAL_USERS_COUNT": {
+            return {
+                ...state,
+                totalUsersCount: action.usersCount
+            }
+        }
         default: {
             return state
         }
@@ -100,5 +118,20 @@ export const setUsersAC = (users: Array<ArrOfPeopleType>) => {
     return {
         type: "SET_USERS",
         users: users
+    } as const
+}
+export type setCurrentPageType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (currentPage: number) => {
+    return {
+        type: "SET_CURRENT_PAGE",
+        currentPage
+    } as const
+}
+
+export type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+export const setTotalUsersCount = (usersCount: number) => {
+    return {
+        type: "SET_TOTAL_USERS_COUNT",
+        usersCount
     } as const
 }

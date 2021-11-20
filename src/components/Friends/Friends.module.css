@@ -39,7 +39,7 @@
     font-size: 12px;
     cursor: pointer;
     margin-top: 10px;
-    transition: 0.1s;
+    transition: 0.2s;
     padding: 10px 17px;
 }
 
@@ -54,7 +54,6 @@
 }
 
 .unFollowStyle:hover {
-    padding: 10px;
     border: 1px solid #5082b9;
     background-color: red;
     border-radius: 20px;
@@ -62,10 +61,10 @@
     color: white;
     cursor: pointer;
     margin-top: 10px;
+    padding: 10px;
 }
 
 .followStyle:hover {
-    padding: 10px;
     border: 1px solid #5082b9;
     background-color: #5082b9;
     border-radius: 20px;
@@ -73,6 +72,7 @@
     color: white;
     cursor: pointer;
     margin-top: 10px;
+    padding: 10px 17px;
 }
 
 .country {
@@ -86,4 +86,9 @@
     font-weight: bold;
     font-size: 13px;
     color: grey;
+}
+
+.currentEl {
+    font-weight: bold;
+    cursor: pointer;
 }
