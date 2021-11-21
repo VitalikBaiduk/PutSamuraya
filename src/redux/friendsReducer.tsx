@@ -45,7 +45,7 @@ let initialState = {
         // {id: 6, followed: true, name: "Brock Lesnar", img: img6, address: {country: "Belarus", city: "Baranovichi"}}
     ],
     pageSize: 4,
-    totalUsersCount: 0,
+    totalUsersCount: 20,
     currentPage: 1,
 }
 

@@ -1,38 +1,24 @@
-import React, {useState} from 'react';
-import classes from "./Friends.module.css"
-import {FriendsPropsType} from "./FriendsContainer";
+import classes from "./Friends.module.css";
 import img2 from "../../img/img2.png";
-import axios from "axios";
+import React from "react";
+
+export type FriendsPropsType = {
+    currentPage: number
+    friends: any[]
+    unFollow: (humanId: number) => void
+    follow: (humanId: number) => void
+    getUsers: () => void
+    pages: Array<number>
+    setPage: (el: number) => void
+}
 
 export const Friends = (props: FriendsPropsType) => {
-
-    const getUsers = () => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-            .then((response) => {
-                props.setUsers(response.data.items)
-                props.setTotalUsersCount(response.data.totalUsersCount)
-            })
-    }
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages: Array<number> = []
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
-    }
-
-    let setPage = (el: number) => {
-        props.setCurrentPage(el)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=${props.pageSize}`)
-            .then((response) => {
-                props.setUsers(response.data.items)
-            })
-    }
-
     return <div className={classes.mainDiv}>
-        <button onClick={getUsers}>Get users</button>
+        <button onClick={props.getUsers}>Get users</button>
         <h3>People</h3>
-        {pages.map((el) => {
+        {props.pages.map((el) => {
             return <span onClick={() => {
-                setPage(el)
+                props.setPage(el)
             }} className={props.currentPage === el ? classes.currentEl : ""}>{el}</span>
         })}
         {
@@ -70,4 +56,5 @@ export const Friends = (props: FriendsPropsType) => {
             })
         }
     </div>
+
 }
