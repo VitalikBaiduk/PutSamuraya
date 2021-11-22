@@ -17,6 +17,7 @@ export type ActionType = addPostActionCreatorType
     | setUsersACType
     | setCurrentPageType
     | setTotalUsersCountType
+    | toggleIsFetchingType
 
 export type ArrOfPeopleType = {
     id: number
@@ -33,9 +34,10 @@ export type friendsReducerStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
-let initialState = {
+let initialState: friendsReducerStateType = {
     friends: [
         // {id: 1, followed: false, name: "Andrew Garfield", img: img1, address: {country: "Belarus", city: "Brest"}},
         // {id: 2, followed: true, name: "Robin Williams", img: img2, address: {country: "Belarus", city: "Minsk"}},
@@ -47,6 +49,7 @@ let initialState = {
     pageSize: 4,
     totalUsersCount: 20,
     currentPage: 1,
+    isFetching: false,
 }
 
 export const friendsReducer = (state: friendsReducerStateType = initialState, action: ActionType): friendsReducerStateType => {
@@ -85,6 +88,12 @@ export const friendsReducer = (state: friendsReducerStateType = initialState, ac
                 totalUsersCount: action.usersCount
             }
         }
+        case "TOGGLE_ISFETCHING": {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
         default: {
             return state
         }
@@ -98,23 +107,23 @@ export const friendsReducerActionCreator = () => {
     } as const
 }
 
-export type followACType = ReturnType<typeof followAC>
-export const followAC = (humanId: number) => {
+export type followACType = ReturnType<typeof follow>
+export const follow = (humanId: number) => {
     return {
         type: "FOLLOW",
         humanId: humanId
     } as const
 }
-export type unFollowACType = ReturnType<typeof unFollowAC>
-export const unFollowAC = (humanId: number) => {
+export type unFollowACType = ReturnType<typeof unFollow>
+export const unFollow = (humanId: number) => {
     return {
         type: "UNFOLLOW",
         humanId: humanId
     } as const
 }
 
-export type setUsersACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: Array<ArrOfPeopleType>) => {
+export type setUsersACType = ReturnType<typeof setUsers>
+export const setUsers = (users: Array<ArrOfPeopleType>) => {
     return {
         type: "SET_USERS",
         users: users
@@ -133,5 +142,12 @@ export const setTotalUsersCount = (usersCount: number) => {
     return {
         type: "SET_TOTAL_USERS_COUNT",
         usersCount
+    } as const
+}
+export type toggleIsFetchingType = ReturnType<typeof toggleIsFetching>
+export const toggleIsFetching = (isFetching: boolean) => {
+    return {
+        type: "TOGGLE_ISFETCHING",
+        isFetching
     } as const
 }
