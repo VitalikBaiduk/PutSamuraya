@@ -92,3 +92,9 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.loader{
+    position: absolute;
+    top:30%;
+    right: 40%;
+}
