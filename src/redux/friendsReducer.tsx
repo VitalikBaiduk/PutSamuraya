@@ -1,11 +1,7 @@
-import img1 from "../img/img1.png";
-import img2 from "../img/img2.png";
-import img3 from "../img/img3.png";
-import img4 from "../img/img4.png";
-import img5 from "../img/img5.png";
-import img6 from "../img/img6.png";
 import {addPostActionCreatorType, changeInputValueActionCreatorType} from "./profileReducer";
 import {sendMessageActionCreatorType, updateNewMessageBodyActionCreatorType} from "./dialogsReducer";
+import {Dispatch} from "redux";
+import {usersApi} from "../api/api";
 
 export type ActionType = addPostActionCreatorType
     | changeInputValueActionCreatorType
@@ -18,8 +14,9 @@ export type ActionType = addPostActionCreatorType
     | setCurrentPageType
     | setTotalUsersCountType
     | toggleIsFetchingType
+    | followingInProgressACType
 
-export type ArrOfPeopleType = {
+export type PeopleType = {
     id: number
     followed: boolean
     name: string
@@ -30,26 +27,21 @@ export type ArrOfPeopleType = {
     }
 }
 export type friendsReducerStateType = {
-    friends: Array<any>
+    friends: Array<PeopleType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 let initialState: friendsReducerStateType = {
-    friends: [
-        // {id: 1, followed: false, name: "Andrew Garfield", img: img1, address: {country: "Belarus", city: "Brest"}},
-        // {id: 2, followed: true, name: "Robin Williams", img: img2, address: {country: "Belarus", city: "Minsk"}},
-        // {id: 3, followed: false, name: "Kate Winslet", img: img3, address: {country: "Russia", city: "Moscow"}},
-        // {id: 4, followed: true, name: "Elise Eberle", img: img4, address: {country: "USA", city: "LA"}},
-        // {id: 5, followed: false, name: "Marta Dusseldorp", img: img5, address: {country: "Ukraine", city: "Kiev"}},
-        // {id: 6, followed: true, name: "Brock Lesnar", img: img6, address: {country: "Belarus", city: "Baranovichi"}}
-    ],
+    friends: [],
     pageSize: 4,
-    totalUsersCount: 20,
+    totalUsersCount: 50,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: [],
 }
 
 export const friendsReducer = (state: friendsReducerStateType = initialState, action: ActionType): friendsReducerStateType => {
@@ -94,6 +86,15 @@ export const friendsReducer = (state: friendsReducerStateType = initialState, ac
                 isFetching: action.isFetching
             }
         }
+        case "FOLLOWING": {
+            console.log(state.followingInProgress)
+            return {
+                ...state,
+                followingInProgress: action.following ?
+                    [...state.followingInProgress, action.id] :
+                    state.followingInProgress.filter(id => id !== action.id)
+            }
+        }
         default: {
             return state
         }
@@ -114,6 +115,7 @@ export const follow = (humanId: number) => {
         humanId: humanId
     } as const
 }
+
 export type unFollowACType = ReturnType<typeof unFollow>
 export const unFollow = (humanId: number) => {
     return {
@@ -123,12 +125,13 @@ export const unFollow = (humanId: number) => {
 }
 
 export type setUsersACType = ReturnType<typeof setUsers>
-export const setUsers = (users: Array<ArrOfPeopleType>) => {
+export const setUsers = (users: Array<PeopleType>) => {
     return {
         type: "SET_USERS",
         users: users
     } as const
 }
+
 export type setCurrentPageType = ReturnType<typeof setCurrentPage>
 export const setCurrentPage = (currentPage: number) => {
     return {
@@ -144,10 +147,68 @@ export const setTotalUsersCount = (usersCount: number) => {
         usersCount
     } as const
 }
+
 export type toggleIsFetchingType = ReturnType<typeof toggleIsFetching>
 export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: "TOGGLE_ISFETCHING",
         isFetching
     } as const
+}
+
+export type followingInProgressACType = ReturnType<typeof followingInProgressAC>
+export const followingInProgressAC = (following: boolean, id: number) => {
+    return {
+        type: "FOLLOWING",
+        following,
+        id
+    } as const
+}
+
+export const getFriendsThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersApi.getUsers(currentPage, pageSize)
+            .then((response) => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(response.items))
+            })
+    }
+}
+
+export const setPageThunkCreator = (el: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setCurrentPage(el))
+        dispatch(toggleIsFetching(true))
+        usersApi.getUsers(el, pageSize)
+            .then((response) => {
+                dispatch(setUsers(response.items))
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+export const followThunk = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressAC(true, id))
+        usersApi.followUser(id).then((response) => {
+            if (response.resultCode === 0) {
+                dispatch(follow(id))
+            }
+            dispatch(followingInProgressAC(false, id))
+        })
+
+    }
+}
+export const unfollowThunk = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressAC(true, id))
+        usersApi.unfollowUser(id).then((response) => {
+            if (response.resultCode === 0) {
+                dispatch(unFollow(id))
+            }
+            dispatch(followingInProgressAC(false, id))
+        })
+
+    }
 }

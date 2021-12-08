@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {FriendsAPIComponentType} from "./FriendsContainer";
 import axios from "axios";
 import {Friends} from "./Friends";
 

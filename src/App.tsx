@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import {Nav} from "./components/Nav/Nav";
-import {Profile} from "./components/Profile/Profile";
-import {Header} from "./components/Header/Header";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Community} from "./components/Community/Community";
@@ -12,15 +10,18 @@ import {Games} from "./components/Games/Games";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainerComponent";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login";
 
 function App() {
     return (
         <div className={"mainPage"}>
-            <Header/>
+            <HeaderContainer/>
             <div className={"mainContent"}>
                 <Nav/>
-                <Route path="/profile" render={() =>
-                    <Profile/>}/>
+                <Route path="/profile/:userId?" render={() =>
+                    <ProfileContainer/>}/>
                 <Route path="/news" component={News}/>
                 <Route path="/dialogs" render={() =>
                     <DialogsContainer/>}/>
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/music" component={Music}/>
                 <Route path="/games" component={Games}/>
                 <Route path="/settings" component={Settings}/>
+                <Route path="/login" component={Login}/>
             </div>
         </div>
     );

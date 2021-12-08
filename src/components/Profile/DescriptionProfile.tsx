@@ -1,12 +1,22 @@
 import React from 'react';
 import classes from "./DescriptionProfile.module.css";
+import {ProfileType} from "../../redux/profileReducer";
 
-export const DescriptionProfile = () => {
+export type DescriptionProfileType = {
+    profile: ProfileType
+    params: any
+}
+export const DescriptionProfile = (props: DescriptionProfileType) => {
+
+    let nameRender = () => {
+        return props.params ? props.profile.fullName : "Vitalik Baiduk"
+    }
+
     return (
         <div className={classes.content}>
             <div className={classes.nameAndActive}>
                 <p className={classes.name}>
-                    Vitalik Baiduk
+                    {nameRender()}
                 </p>
                 <p className={classes.active}>
                     Online

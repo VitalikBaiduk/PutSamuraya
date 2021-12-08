@@ -1,15 +1,18 @@
 import classes from "./Friends.module.css";
-import img2 from "../../img/img2.png";
+import user from "../../img/user (1).png";
 import React from "react";
+import {NavLink} from "react-router-dom";
+import {usersApi} from "../../api/api";
 
-export type FriendsPropsType = {
+type FriendsPropsType = {
     currentPage: number
     friends: any[]
-    unFollow: (humanId: number) => void
-    follow: (humanId: number) => void
+    unfollowThunk: (id: number) => void
+    followThunk: (id: number) => void
     getUsers: () => void
     pages: Array<number>
     setPage: (el: number) => void
+    followingInProgress: number[]
 }
 
 export const Friends = (props: FriendsPropsType) => {
@@ -27,27 +30,32 @@ export const Friends = (props: FriendsPropsType) => {
                     <div key={elem.id} className={classes.mainFriendsDiv}>
                         <div className={classes.divFriends}>
                             <div className={classes.photoAndName}>
-                                <img className={classes.imgFriends} src={elem.photos.small !== null ? elem.img : img2}/>
+                                <NavLink to={'/profile/' + elem.id}>
+                                    <img className={classes.imgFriends}
+                                         src={elem.photos.small !== null ? elem.img : user}/>
+                                </NavLink>
                                 <h4 className={classes.nameOfPeoples}>{elem.name}</h4>
                             </div>
                             <div className={classes.addressInfo}>
-                                <p className={classes.country}>{"elem.address.country"}</p>
-                                <p className={classes.city}>{"elem.address.city"}</p>
+                                <p className={classes.country}>{"Belarus"}</p>
+                                <p className={classes.city}>{"Brest"}</p>
                             </div>
                         </div>
                         {
                             elem.followed ?
                                 <div>
-                                    <button onClick={() => {
-                                        props.unFollow((elem.id))
-                                    }} className={classes.unFollowStyle}>UNFOLLOW
+                                    <button disabled={props.followingInProgress.some(id => id === elem.id)}
+                                            onClick={() => {
+                                                props.unfollowThunk(elem.id)
+                                            }} className={classes.unFollowStyle}>UNFOLLOW
                                     </button>
                                 </div>
                                 :
                                 <div>
-                                    <button onClick={() => {
-                                        props.follow((elem.id))
-                                    }} className={classes.followStyle}>FOLLOW
+                                    <button disabled={props.followingInProgress.some(id => id === elem.id)}
+                                            onClick={() => {
+                                                props.followThunk(elem.id)
+                                            }} className={classes.followStyle}>FOLLOW
                                     </button>
                                 </div>
                         }

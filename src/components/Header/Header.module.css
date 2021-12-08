@@ -1,13 +1,54 @@
-body{
+body {
     background-color: lightgrey;
 }
 
 .mainHeader {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #5082b9;
 }
 
 .logo {
     width: 5%;
     margin-left: 170px;
+}
+
+.loginBlock {
+    margin-right: 140px;
+}
+
+.loginButton {
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    padding: 10px 25px;
+    transition: 0.2s;
+}
+
+.loginButton:hover {
+    color: #5082b9;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 25px;
+}
+
+.loginName {
+    color: white;
+    font-weight: bold;
+}
+
+.activeLogin {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5082b9;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
 }

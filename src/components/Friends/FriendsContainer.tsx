@@ -1,14 +1,11 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    ArrOfPeopleType,
-    follow,
-    setCurrentPage,
+    followingInProgressAC, followThunk, getFriendsThunkCreator,
+    setCurrentPage, setPageThunkCreator,
     setTotalUsersCount,
-    setUsers, toggleIsFetching,
-    unFollow
+    unFollow, unfollowThunk,
 } from "../../redux/friendsReducer";
-import axios from "axios";
 import React from "react";
 import {Friends} from "./Friends";
 import {Preloader} from "../Preloader/Preloader";
@@ -17,15 +14,9 @@ import {Preloader} from "../Preloader/Preloader";
 export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
 
     const getUsers = () => {
-        props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-            .then((response) => {
-                props.toggleIsFetching(false)
-                props.setUsers(response.data.items)
-                console.log(response.data.totalUsersCount)
-            })
-
+        props.getUsers(props.currentPage, props.pageSize)
     }
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages: Array<number> = []
 
@@ -34,14 +25,9 @@ export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
     }
 
     let setPage = (el: number) => {
-        props.setCurrentPage(el)
-        props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=${props.pageSize}`)
-            .then((response) => {
-                props.setUsers(response.data.items)
-                props.toggleIsFetching(false)
-            })
+        props.setPageThunkCreator(el, props.pageSize)
     }
+
     return (
         <>
             {props.isFetching ?
@@ -50,11 +36,12 @@ export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
                 <Friends
                     currentPage={props.currentPage}
                     friends={props.friends}
-                    unFollow={props.unFollow}
-                    follow={props.follow}
+                    unfollowThunk={props.unfollowThunk}
+                    followThunk={props.followThunk}
                     getUsers={getUsers}
                     pages={pages}
                     setPage={setPage}
+                    followingInProgress={props.followingInProgress}
                 />}
 
         </>
@@ -67,14 +54,16 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 type mapDispatchToPropsType = {
-    follow: (humanId: number) => void
-    unFollow: (humanId: number) => void
-    setUsers: (users: Array<any>) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (usersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
+    followingInProgressAC: (following: boolean, id: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+    setPageThunkCreator: (el: number, pageSize: number) => void
+    followThunk: (id: number) => void
+    unfollowThunk: (id: number) => void
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -83,14 +72,21 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         pageSize: state.friendsReducer.pageSize,
         totalUsersCount: state.friendsReducer.totalUsersCount,
         currentPage: state.friendsReducer.currentPage,
-        isFetching: state.friendsReducer.isFetching
+        isFetching: state.friendsReducer.isFetching,
+        followingInProgress: state.friendsReducer.followingInProgress
     }
 }
-export type FriendsAPIComponentType = mapStateToPropsType & mapDispatchToPropsType
-
+type FriendsAPIComponentType = mapStateToPropsType & mapDispatchToPropsType
 
 export const FriendsContainer = connect(mapStateToProps,
     {
-        follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching
+        unFollow,
+        setCurrentPage,
+        setTotalUsersCount,
+        followingInProgressAC,
+        getUsers: getFriendsThunkCreator,
+        setPageThunkCreator,
+        followThunk,
+        unfollowThunk,
     }
 )(FriendsContainerComponent)
