@@ -1,0 +1,13 @@
+.inputOnProfile {
+    width: 95%;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid cornflowerblue;
+}
+.status{
+    color: white;
+    background: grey;
+    padding: 5px;
+    border-radius: 15px;
+}

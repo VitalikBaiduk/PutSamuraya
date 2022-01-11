@@ -9,6 +9,14 @@ import {
 import React from "react";
 import {Friends} from "./Friends";
 import {Preloader} from "../Preloader/Preloader";
+import {
+    followingInProgress,
+    getPageSize,
+    getTotalUsersCount,
+    getRequestUsers,
+    getСurrentPage,
+    isFetching
+} from "../../redux/users-selectors";
 
 
 export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
@@ -68,12 +76,12 @@ type mapDispatchToPropsType = {
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        friends: state.friendsReducer.friends,
-        pageSize: state.friendsReducer.pageSize,
-        totalUsersCount: state.friendsReducer.totalUsersCount,
-        currentPage: state.friendsReducer.currentPage,
-        isFetching: state.friendsReducer.isFetching,
-        followingInProgress: state.friendsReducer.followingInProgress
+        friends: getRequestUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getСurrentPage(state),
+        isFetching: isFetching(state),
+        followingInProgress: followingInProgress(state)
     }
 }
 type FriendsAPIComponentType = mapStateToPropsType & mapDispatchToPropsType

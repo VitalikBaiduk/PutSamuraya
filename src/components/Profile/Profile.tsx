@@ -4,7 +4,6 @@ import {ProtoAndInfo} from "./PhotoAndInfo";
 import {DescriptionProfile} from "./DescriptionProfile";
 import {PostContainer} from "./Post/PostContainer";
 import {ProfileType} from "../../redux/profileReducer";
-import {Redirect} from "react-router-dom";
 
 
 export type ProfilePropsType = {
@@ -12,15 +11,20 @@ export type ProfilePropsType = {
     setUsersProfile: (profile: any) => void
     toggleIsFetching: (isFetching: boolean) => void
     params: any
-    isAuth: boolean
+    status: string
+    updateStatus: (status: any) => void
 }
 export const Profile = (props: ProfilePropsType) => {
-    if (!props.isAuth) return <Redirect to="/login"/>
     return (
         <div className={classes.mainContent}>
             <div className={classes.content}>
-                <ProtoAndInfo profile={props.profile} params={props.params}/>
-                <DescriptionProfile profile={props.profile} params={props.params}/>
+                <ProtoAndInfo profile={props.profile}
+                              params={props.params}/>
+                <DescriptionProfile profile={props.profile}
+                                    params={props.params}
+                                    status={props.status}
+                                    updateStatus={props.updateStatus}
+                />
             </div>
             <PostContainer/>
         </div>

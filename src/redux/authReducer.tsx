@@ -1,5 +1,6 @@
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {authApi} from "../api/api";
+import {AxiosResponse} from "axios";
 
 type ActionType = setUserDataType
 
@@ -41,13 +42,15 @@ export const setUserData = (userId: any, email: any, login: any) => {
     } as const
 }
 
-export const getAuthUserData = () => {
-  return (dispatch:Dispatch) =>{
-      authApi.me().then((response) => {
-          if (response.data.resultCode === 0) {
-              let {id, email, login} = response.data.data
-              dispatch(setUserData(id, email, login))
-          }
-      })
-  }
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    try {
+        const res = await authApi.me()
+        if (res.data.resultCode === 0) {
+            let {id, email, login} = res.data.data
+            dispatch(setUserData(id, email, login))
+        }
+        return res
+    } catch (err) {
+
+    }
 }

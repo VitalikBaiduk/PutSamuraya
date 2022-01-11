@@ -1,6 +1,6 @@
 import {sendMessageActionCreatorType, updateNewMessageBodyActionCreatorType} from "./dialogsReducer";
 import {friendsReducerActionCreatorType, toggleIsFetching} from "./friendsReducer";
-import {usersApi} from "../api/api";
+import {profileApi, usersApi} from "../api/api";
 import {Dispatch} from "redux";
 
 type ActionType = addPostActionCreatorType
@@ -9,6 +9,7 @@ type ActionType = addPostActionCreatorType
     | sendMessageActionCreatorType
     | friendsReducerActionCreatorType
     | setUsersProfileType
+    | setStatusType
 
 export type ArrPostsType = {
     id: number
@@ -41,12 +42,14 @@ export type initialStateType = {
     profile: ProfileType,
     posts: Array<ArrPostsType>,
     newInputValue: string
+    status: string
 }
 
 let initialState: initialStateType = {
     profile: {} as ProfileType,
     posts: [] as Array<ArrPostsType>,
     newInputValue: "",
+    status: "",
 }
 export const profileReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
@@ -66,6 +69,12 @@ export const profileReducer = (state: initialStateType = initialState, action: A
             return {
                 ...state,
                 profile: action.profile
+            }
+        }
+        case "SET_STATUS": {
+            return {
+                ...state,
+                status: action.status
             }
         }
         default :
@@ -95,6 +104,15 @@ export const setUsersProfile = (profile: ProfileType) => {
     } as const
 }
 
+export type setStatusType = ReturnType<typeof setStatus>
+export const setStatus = (status: string) => {
+    return {
+        type: "SET_STATUS",
+        status
+    } as const
+}
+
+
 export const setUserThunkCreator = (userId: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
@@ -102,6 +120,27 @@ export const setUserThunkCreator = (userId: number) => {
             .then((response) => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsersProfile(response.data))
+            })
+    }
+}
+
+export const getStatus = (userId: any) => {
+    return (dispatch: Dispatch) => {
+        profileApi.getStatus(userId)
+            .then((response) =>{
+                dispatch(setStatus(response.data))
+            })
+    }
+}
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileApi.updateStatus(status)
+            .then((response) =>{
+                debugger
+                if (response.data.resultCode === 0){
+                    // debugger
+                    dispatch(setStatus(status))
+                }
             })
     }
 }

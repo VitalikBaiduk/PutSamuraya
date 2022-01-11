@@ -1,10 +1,13 @@
 import React from 'react';
 import classes from "./DescriptionProfile.module.css";
 import {ProfileType} from "../../redux/profileReducer";
+import {EditableSpan} from "./EditableSpan/EditableSpan";
 
 export type DescriptionProfileType = {
     profile: ProfileType
     params: any
+    status: string
+    updateStatus: (status: any) => void
 }
 export const DescriptionProfile = (props: DescriptionProfileType) => {
 
@@ -22,6 +25,7 @@ export const DescriptionProfile = (props: DescriptionProfileType) => {
                     Online
                 </p>
             </div>
+            <EditableSpan status={props.status} updateStatus={props.updateStatus}/>
             <div className={classes.descrOfHuman}>
                 <div className={classes.elemDescrOfHuman}>
                     <p className={classes.textDescr}>Date of Birth:</p>
