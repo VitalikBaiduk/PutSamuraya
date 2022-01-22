@@ -6,7 +6,7 @@ import {
     setTotalUsersCount,
     unFollow, unfollowThunk,
 } from "../../redux/friendsReducer";
-import React from "react";
+import React, {useState} from "react";
 import {Friends} from "./Friends";
 import {Preloader} from "../Preloader/Preloader";
 import {
@@ -21,11 +21,16 @@ import {
 
 export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
 
+    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    // let [portionNumber, setPortionNumber] = useState(1)
+    // let portionCount = Math.ceil(pageCount / 10)
+    // let leftBorder = (portionNumber - 1) * 10 + 1
+    // let rightBorder = portionNumber * 10
+
     const getUsers = () => {
         props.getUsers(props.currentPage, props.pageSize)
     }
 
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages: Array<number> = []
 
     for (let i = 1; i <= pageCount; i++) {
@@ -50,6 +55,8 @@ export const FriendsContainerComponent = (props: FriendsAPIComponentType) => {
                     pages={pages}
                     setPage={setPage}
                     followingInProgress={props.followingInProgress}
+                    totalUsersCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
                 />}
 
         </>

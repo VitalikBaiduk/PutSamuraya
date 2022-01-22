@@ -18,8 +18,6 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     }
     let onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
-        // props.updateStatus(value)
-        // console.log(props.status)
     };
 
     return (

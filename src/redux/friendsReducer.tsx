@@ -38,7 +38,7 @@ export type friendsReducerStateType = {
 let initialState: friendsReducerStateType = {
     friends: [],
     pageSize: 4,
-    totalUsersCount: 50,
+    totalUsersCount: 150,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],

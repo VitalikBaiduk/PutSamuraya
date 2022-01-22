@@ -11,12 +11,11 @@ const instance = axios.create({
 
 export const usersApi = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
-            return response.data
-        })
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => response.data)
     },
     followUser(id: number) {
-        return instance.post(`follow/${id}`, {},)
+        return instance.post(`follow/${id}`,)
             .then((response) => {
                 return response.data
             })
@@ -46,7 +45,7 @@ export let profileApi = {
             })
     },
     updateStatus(status: string) {
-        return instance.put('profile/status', )
+        return instance.put('profile/status',)
     }
 }
 
