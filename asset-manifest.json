@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/putSamuraya/static/css/main.37a98e25.chunk.css",
-    "main.js": "/putSamuraya/static/js/main.2d493ae7.chunk.js",
-    "main.js.map": "/putSamuraya/static/js/main.2d493ae7.chunk.js.map",
+    "main.js": "/putSamuraya/static/js/main.d59a686e.chunk.js",
+    "main.js.map": "/putSamuraya/static/js/main.d59a686e.chunk.js.map",
     "runtime-main.js": "/putSamuraya/static/js/runtime-main.067440d3.js",
     "runtime-main.js.map": "/putSamuraya/static/js/runtime-main.067440d3.js.map",
-    "static/js/2.20b7406a.chunk.js": "/putSamuraya/static/js/2.20b7406a.chunk.js",
-    "static/js/2.20b7406a.chunk.js.map": "/putSamuraya/static/js/2.20b7406a.chunk.js.map",
+    "static/js/2.29d9bd07.chunk.js": "/putSamuraya/static/js/2.29d9bd07.chunk.js",
+    "static/js/2.29d9bd07.chunk.js.map": "/putSamuraya/static/js/2.29d9bd07.chunk.js.map",
     "static/js/3.23b0a9b8.chunk.js": "/putSamuraya/static/js/3.23b0a9b8.chunk.js",
     "static/js/3.23b0a9b8.chunk.js.map": "/putSamuraya/static/js/3.23b0a9b8.chunk.js.map",
     "index.html": "/putSamuraya/index.html",
     "static/css/main.37a98e25.chunk.css.map": "/putSamuraya/static/css/main.37a98e25.chunk.css.map",
-    "static/js/2.20b7406a.chunk.js.LICENSE.txt": "/putSamuraya/static/js/2.20b7406a.chunk.js.LICENSE.txt",
+    "static/js/2.29d9bd07.chunk.js.LICENSE.txt": "/putSamuraya/static/js/2.29d9bd07.chunk.js.LICENSE.txt",
     "static/media/Double Ring-1s-200px.1ef49492.svg": "/putSamuraya/static/media/Double Ring-1s-200px.1ef49492.svg",
     "static/media/img1.8733ce12.png": "/putSamuraya/static/media/img1.8733ce12.png",
     "static/media/img2.8e433e63.png": "/putSamuraya/static/media/img2.8e433e63.png",
@@ -25,8 +25,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.067440d3.js",
-    "static/js/2.20b7406a.chunk.js",
+    "static/js/2.29d9bd07.chunk.js",
     "static/css/main.37a98e25.chunk.css",
-    "static/js/main.2d493ae7.chunk.js"
+    "static/js/main.d59a686e.chunk.js"
   ]
 }
