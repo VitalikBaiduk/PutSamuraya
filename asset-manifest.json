@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/putSamuraya/static/css/main.37a98e25.chunk.css",
-    "main.js": "/putSamuraya/static/js/main.d59a686e.chunk.js",
-    "main.js.map": "/putSamuraya/static/js/main.d59a686e.chunk.js.map",
+    "main.js": "/putSamuraya/static/js/main.dbec342a.chunk.js",
+    "main.js.map": "/putSamuraya/static/js/main.dbec342a.chunk.js.map",
     "runtime-main.js": "/putSamuraya/static/js/runtime-main.067440d3.js",
     "runtime-main.js.map": "/putSamuraya/static/js/runtime-main.067440d3.js.map",
     "static/js/2.29d9bd07.chunk.js": "/putSamuraya/static/js/2.29d9bd07.chunk.js",
@@ -27,6 +27,6 @@
     "static/js/runtime-main.067440d3.js",
     "static/js/2.29d9bd07.chunk.js",
     "static/css/main.37a98e25.chunk.css",
-    "static/js/main.d59a686e.chunk.js"
+    "static/js/main.dbec342a.chunk.js"
   ]
 }
